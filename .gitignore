@@ -1,0 +1,10 @@
+# 敏感配置文件
+config.json
+
+# 依赖和日志
+node_modules/
+*.log
+feishu-event.log
+*.pid
+.env
+.DS_Store
