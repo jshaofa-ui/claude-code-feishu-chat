@@ -1,11 +1,18 @@
 {
   "feishu": {
     "enabled": true,
-    "connectionMode": "lark-cli",
-    "eventTypes": ["im.message.receive_v1"]
+    "appId": "cli_a91b8b28d1f8dbc4",
+    "appSecret": "",
+    "domain": "feishu",
+    "connectionMode": "websocket",
+    "encryptKey": "",
+    "verificationToken": "",
+    "allowedChats": [
+      "oc_46c41a301af3569cc149d190d37c0060",
+      "oc_dd65a2afd81096384d16588ae9aff282"
+    ]
   },
   "claude": {
-    "acpMode": false,
     "command": "claude",
     "args": ["-p"]
   }

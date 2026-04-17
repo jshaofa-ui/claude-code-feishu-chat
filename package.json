@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@larksuiteoapi/node-sdk": "^1.60.0",
+    "@xwang152/claw-lark": "^0.1.40",
     "axios": "^1.6.0",
     "dotenv": "^16.3.1",
     "express": "^4.22.1",
