@@ -1,10 +1,10 @@
 #!/bin/bash
-# Claude Code 飞书事件处理器启动脚本
+# Claude Code 专用飞书 WebSocket 长连接集成启动脚本
 
 cd "$(dirname "$0")"
 
 echo "========================================"
-echo "Claude Code 飞书事件处理器"
+echo "Claude Code 专用飞书 WebSocket 长连接集成"
 echo "========================================"
 echo ""
 
@@ -19,20 +19,11 @@ if ! command -v lark-cli &> /dev/null; then
     exit 1
 fi
 
-# 检查配置
-if [ ! -f "config.json" ]; then
-    echo "❌ 错误：config.json 不存在"
+if ! command -v claude &> /dev/null; then
+    echo "❌ 错误：claude 未安装"
     exit 1
 fi
 
-# 检查 node_modules
-if [ ! -d "node_modules" ]; then
-    echo "📦 安装依赖..."
-    npm install
-fi
-
-echo "✅ 启动事件处理器..."
-echo ""
-
-# 启动服务
-node server.js
+# 启动 WebSocket 长连接服务
+echo "🔗 启动 Claude Code 专用飞书 WebSocket 长连接..."
+node websocket-bridge.js

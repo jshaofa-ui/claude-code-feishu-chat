@@ -1,8 +1,8 @@
 #!/bin/bash
-# Claude Code 飞书事件处理器 - 后台守护进程
+# Claude Code 专用飞书 WebSocket 长连接集成 - 后台守护进程
 
-PIDFILE="$HOME/.claude/feishu-bot/feishu-event.pid"
-LOGFILE="$HOME/.claude/feishu-bot/feishu-event.log"
+PIDFILE="$HOME/.claude/claude-code-feishu-chat/claude-ws.pid"
+LOGFILE="$HOME/.claude/claude-code-feishu-chat/claude-ws.log"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 start() {
@@ -11,9 +11,9 @@ start() {
         return 1
     fi
 
-    echo "🚀 启动 Claude Code 飞书事件处理器..."
+    echo "🔗 启动 Claude Code 专用飞书 WebSocket 长连接..."
     cd "$SCRIPT_DIR"
-    nohup node server.js > "$LOGFILE" 2>&1 &
+    nohup node websocket-bridge.js > "$LOGFILE" 2>&1 &
     echo $! > "$PIDFILE"
     echo "✅ 已启动 (PID: $(cat $PIDFILE))"
     echo "📄 日志：$LOGFILE"
@@ -23,7 +23,7 @@ stop() {
     if [ -f "$PIDFILE" ]; then
         PID=$(cat "$PIDFILE")
         if kill -0 "$PID" 2>/dev/null; then
-            echo "🛑 停止服务 (PID: $PID)..."
+            echo "🛑 停止 WebSocket 长连接服务 (PID: $PID)..."
             kill "$PID"
             rm -f "$PIDFILE"
             echo "✅ 已停止"
@@ -44,13 +44,13 @@ restart() {
 
 status() {
     if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE") 2>/dev/null; then
-        echo "✅ 运行中 (PID: $(cat $PIDFILE))"
+        echo "✅ WebSocket 长连接运行中 (PID: $(cat $PIDFILE))"
         echo "📄 日志：$LOGFILE"
         echo ""
         echo "最近日志:"
         tail -20 "$LOGFILE"
     else
-        echo "❌ 未运行"
+        echo "❌ WebSocket 长连接未运行"
     fi
 }
 
